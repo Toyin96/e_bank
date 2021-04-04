@@ -7,7 +7,6 @@ class Customer:
     """Simulates a typical user object"""
 
     def __init__(self, first_name, last_name, username, age, email_address, phone_number, address):
-        super().__init__()
         self.first_name = first_name
         self.last_name = last_name
         self.username = username
@@ -16,12 +15,13 @@ class Customer:
         self.phone_number = phone_number
         self.address = address
         self.login_attempt = 0
-        self.account = Account(0)
+        self.account = Account()
 
     def describe_user(self):
         """Gives a description of the user profile"""
         print("Below is a brief description of the user:")
         print(f"\nfull name: {self.first_name} {self.last_name}\nusername: {self.username}\nage: {self.age}\n"
+              f"account number: {self.account.account_number}\naccount balance: ${self.account.account_balance}\n"
               f"email_address: {self.email_address}\nphone_number: {self.phone_number}\n"
               f"address: {self.address}\nlogin attempt: {self.login_attempt}\n")
 
@@ -41,3 +41,10 @@ class Customer:
         """Displays user's login attempt so far"""
         print(self.login_attempt)
 
+
+if __name__ == "__main__":
+
+    toyin_cust = Customer("toyin", "onag", "tboy", 25, "onag@gmail.com", "09043910175",
+                      "iwaya - yaba")
+    toyin_cust.age = 30
+    toyin_cust.describe_user()

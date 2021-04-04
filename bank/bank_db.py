@@ -8,7 +8,6 @@ class Bank:
     def __init__(self):
         """Initializing the bank attributes"""
         self.list_of_customers = []
-        self.new_customer = {}
 
     def create_new_customer(self):
         """Adds a new customer to the database"""
@@ -16,25 +15,29 @@ class Bank:
         last_name = input("Enter your last name: ")
         username = input("Enter your preferred username: ")
         age = input("Enter your current age: ")
-        email_address = input("Enter your active email address: ")
+        email_address = input("Enter your active email: ")
         phone_number = input("Enter your phone_number: ")
         address = input("Enter your home address: ")
+
+        customer = {}
 
         response = self.input_validator(first_name, last_name, username, int(age), email_address, int(phone_number),
                                         address)
 
         if response:
-            self.new_customer['first_name'] = first_name.strip().lower()
-            self.new_customer['last_name'] = last_name.strip().lower()
-            self.new_customer['username'] = username.strip().lower()
-            self.new_customer['age'] = int(age)
-            self.new_customer['balance'] = 0
-            self.new_customer['email_address'] = email_address.strip().lower()
-            self.new_customer['phone_number'] = int(phone_number)
-            self.new_customer['address'] = address.strip().lower()
+            new_customer = Customer(first_name, last_name, username, age, email_address, phone_number, address)
+            customer['first_name'] = new_customer.first_name.strip().lower()
+            customer['last_name'] = new_customer.last_name.strip().lower()
+            customer['username'] = new_customer.username.strip().lower()
+            customer['age'] = int(new_customer.age)
+            customer['balance'] = new_customer.account.account_balance
+            customer['account_number'] = new_customer.account.account_number
+            customer['email_address'] = new_customer.email_address.strip().lower()
+            customer['phone_number'] = int(new_customer.phone_number)
+            customer['address'] = new_customer.address.strip().lower()
 
-            self.list_of_customers.append(self.new_customer)
-            print(f"\nAccount created successfully. Here are your details\n {self.new_customer}")
+            self.list_of_customers.append(customer)
+            print(f"\nAccount created successfully. Here are your details\n {self.list_of_customers}")
         else:
             print("Could not create account")
 
@@ -111,11 +114,14 @@ class Bank:
             else:
                 print("Username not recognized")
 
+    def get_customers(self):
+        """fetches all the customers in the database"""
+        for user in self.list_of_customers:
+            print(user)
+
 
 if __name__ == "__main__":
     toyin_bank = Bank()
     toyin_bank.create_new_customer()
     toyin_bank.create_new_customer()
-    print(toyin_bank.view_list_of_customers())
-    toyin_bank.make_deposit()
-    toyin_bank.withdraw_money()
+    toyin_bank.customer.first_name
